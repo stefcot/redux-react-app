@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import store from './store'
+import {updateCurrent} from './reducers/todo'
 
 // const handleInputChange = (evt) => {
 //   store.dispatch({
@@ -17,10 +18,7 @@ import store from './store'
 // }
 
 const todoChangeHandler = (val) => {
-  store.dispatch({
-    type: 'CURRENT_UPDATE',
-    payload: val
-  })
+  store.dispatch(updateCurrent(val))
 }
 
 const renderAtStart = () => {
