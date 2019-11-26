@@ -24,7 +24,10 @@ class App extends React.Component {
         </header>
         <main className="todo-page">
           <section className="todo-app">
-            <TodoForm/>
+            <TodoForm
+              currentTodo={this.props.currentTodo}
+              changeCurrent={this.props.changeCurrent}
+            />
             <TodoList todos={this.props.todos} />
           </section>
         </main>

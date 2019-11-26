@@ -5,6 +5,23 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import store from './store'
 
+// const handleInputChange = (evt) => {
+//   store.dispatch({
+//     type: 'TODO_ADD',
+//     payload: {
+//       id: Math.round(Math.random()*1000),
+//       name: evt.target.value,
+//       isComplete: false
+//     }
+//   })
+// }
+
+const todoChangeHandler = (val) => {
+  store.dispatch({
+    type: 'CURRENT_UPDATE',
+    payload: val
+  })
+}
 
 const renderAtStart = () => {
   // Don't forget to add the store to get last state
@@ -14,7 +31,11 @@ const renderAtStart = () => {
   // the state gonna be spread as props
 
   // NO PROVIDER YET
-  ReactDOM.render(<App {...state} />, document.getElementById('root'));
+  ReactDOM.render(<App
+    todos={state.todos}
+    currentTodo={state.currentTodo}
+    changeCurrent={todoChangeHandler}
+  />, document.getElementById('root'));
 }
 
 // render just once with initial sore data
@@ -26,9 +47,9 @@ renderAtStart();
 store.subscribe(renderAtStart);
 
 // For test purposes, programmatically dispatches an 'TODO_ADD' action
-setTimeout(() => {
-  store.dispatch({type: 'TODO_ADD', payload: {id: 456, name:'Task added with a set timout', isComplete: true}})
-}, 3000)
+// setTimeout(() => {
+//   store.dispatch({type: 'TODO_ADD', payload: {id: 456, name:'Task added with a set timout', isComplete: true}})
+// }, 3000)
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
