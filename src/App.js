@@ -2,7 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
+function App({ todos }) {
   return (
     <div className="App">
       <header className="App-header">
@@ -26,21 +26,18 @@ function App() {
           </form>
           <div className="todo-items">
             <ul className="todo-list">
-              <li className="todo-list-item">
-                <input id="cb-1" name="cb-1"  type="checkbox" className="todo-list-item-cb"/>
-                <label htmlFor="cb-1"/>
-                <span className="todo-list-item-label">Create static UI</span>
-              </li>
-              <li className="todo-list-item">
-                <input id="cb-2" name="cb-2" type="checkbox" className="todo-list-item-cb"/>
-                <label htmlFor="cb-2"/>
-                <span className="todo-list-item-label">Create initial state</span>
-              </li>
-              <li className="todo-list-item">
-                <input id="cb-3" name="cb-3" type="checkbox" className="todo-list-item-cb"/>
-                <label htmlFor="cb-3"/>
-                <span className="todo-list-item-label">Update state to render UI</span>
-              </li>
+              {todos.map((todo) => (
+                <li key={todo.id} className="todo-list-item">
+                  <input
+                    id={"cb" + todo.id}
+                    name={"cb" + todo.id}
+                    type="checkbox"
+                    defaultChecked={todo.isComplete}
+                    className="todo-list-item-cb"/>
+                  <label htmlFor={"cb" + todo.id}/>
+                  <span className="todo-list-item-label">{todo.name}</span>
+                </li>
+              ))}
             </ul>
           </div>
         </section>
