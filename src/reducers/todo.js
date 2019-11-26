@@ -25,6 +25,5 @@ export default (state = initialState, action) => {
       return {...state, currentTodo: action.payload}
     default:
       return state
-
   }
 }

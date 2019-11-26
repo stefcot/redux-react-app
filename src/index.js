@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import store from './store'
+import {bindActionCreators} from "redux"
+// Action creator to be bound with bindActionCreators and added to store.dispatch global 'config'
 import {updateCurrent} from './reducers/todo'
 
 // const handleInputChange = (evt) => {
@@ -17,9 +19,22 @@ import {updateCurrent} from './reducers/todo'
 //   })
 // }
 
-const todoChangeHandler = (val) => {
-  store.dispatch(updateCurrent(val))
-}
+// PHASE 1
+// the methods passed will get the store dispatch
+// a generated action imported from the reducer module
+// const todoChangeHandler = (val) => {
+//   store.dispatch(updateCurrent(val))
+// }
+
+// PHASE 2
+// const actions = bindActionCreators({
+//   todoChangeHandler: updateCurrent // function that dispatch the action return by the action creator
+// }, store.dispatch)
+
+// PHASE 3
+// can be written this way because function that dispatch
+// the action can have the same name as the action creator
+const actions = bindActionCreators({updateCurrent}, store.dispatch)
 
 const renderAtStart = () => {
   // Don't forget to add the store to get last state
@@ -32,7 +47,9 @@ const renderAtStart = () => {
   ReactDOM.render(<App
     todos={state.todos}
     currentTodo={state.currentTodo}
-    changeCurrent={todoChangeHandler}
+    //changeCurrent={todoChangeHandler}// PHASE 1
+    //changeCurrent={actions.todoChangeHandler}// PHASE 2
+    changeCurrent={actions.updateCurrent}// PHASE 3
   />, document.getElementById('root'));
 }
 
