@@ -8,15 +8,112 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 30vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  padding: 40px;
 }
 
 .App-link {
   color: #09d3ac;
+}
+
+.todo-page {
+  display: flex;
+  flex-flow: column;
+  background-color: #ddd;
+  min-height: 70vh;
+  padding: 40px;
+}
+
+.todo-app {
+  background-color: transparent;
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.todo-form {
+  box-shadow: 0 0 50px 50px rgba(0,0,0,.05);
+  background-color: #fff;
+  border-radius: 4px;
+  display: flex;
+  justify-content: left;
+  margin: 0 auto 20px;
+  padding: 20px;
+}
+
+.todo-input-add {
+  background-color: #ddd;
+  border-radius: 2px;
+  height: 40px;
+  color: #282c34;
+  border: 0 none;
+  outline: 0 none;
+  padding: 0 10px;
+}
+
+.todo-items {
+  box-shadow: 0 0 50px 50px rgba(0,0,0,.05);
+  background-color: #fff;
+  border-radius: 4px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.todo-list {
+  list-style: none;
+}
+
+.todo-list-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.todo-list-item-cb {
+-webkit-appearance: none;
+}
+
+input[type=checkbox] {
+  visibility: hidden;
+}
+
+input[type=checkbox] + label {
+  display: inline-block;
+  background-color: #ddd;
+  border-radius: 2px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  position: relative;
+  margin: 0 10px 0 0;
+}
+
+input[type=checkbox] + label:after {
+  opacity: 0;
+  content: '';
+  width: 10px;
+  height: 6px;
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  border: 3px solid #282c34;
+  border-top: none;
+  border-right: none;
+  background: transparent;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+input[type=checkbox]:checked + label:after {
+  opacity: 1;
+}
+
+.todo-list-item-label {
+  font-size: 14px;
 }
