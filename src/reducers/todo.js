@@ -1,6 +1,10 @@
 // Some initial global state
 const initialState = {
-  todos: [] // empty todo list
+  todos: [
+      {id: 1, name:'Create Static UI', isComplete: true},
+      {id: 2, name:'Create Initial State', isComplete: false},
+      {id: 3, name:'Use state to render UI', isComplete: false}
+    ]
 }
 
 export default (state = initialState, action) => {
