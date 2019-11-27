@@ -3,8 +3,7 @@ import Todo from './Todo'
 import './TodoList.css'
 import {connect} from 'react-redux'
 
-const TodoList =  ({ todos }) =>
-  console.log('TodoList::rendering') || (
+const TodoList =  ({ todos }) => (
   <div className="todo-items">
     <ul className="todo-list">
       {todos.map((todo) => (
@@ -14,6 +13,8 @@ const TodoList =  ({ todos }) =>
   </div>
 )
 
-const mapStateToProps = (state) => ({todos: state.todos})
+const mapStateToProps = (state) => ({
+  todos: state.todos
+})
 
 export default connect(mapStateToProps)(TodoList)

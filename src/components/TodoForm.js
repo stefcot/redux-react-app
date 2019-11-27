@@ -2,8 +2,6 @@
 import React from 'react'
 import './TodoForm.css'
 import {connect} from 'react-redux'
-// import {bindActionCreators} from "redux"
-// Action creator to be bound with bindActionCreators and added to store.dispatch global 'config'
 import {updateCurrent} from '../reducers/todo'
 
 const TodoForm = (props) => {
