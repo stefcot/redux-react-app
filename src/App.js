@@ -4,6 +4,10 @@ import logo from './logo.svg';
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
 import './App.css';
+import {bindActionCreators} from "redux"
+// Action creator to be bound with bindActionCreators and added to store.dispatch global 'config'
+import {updateCurrent} from './reducers/todo'
+import store from "./store";
 
 class App extends React.Component {
   render(){
@@ -27,7 +31,7 @@ class App extends React.Component {
           <section className="todo-app">
             <TodoForm
               currentTodo={this.props.currentTodo}
-              changeCurrent={this.props.changeCurrent}
+              changeCurrent={this.props.updateCurrent}
             />
             <TodoList todos={this.props.todos} />
           </section>
@@ -37,8 +41,16 @@ class App extends React.Component {
   }
 }
 
+// can be written this way because function that dispatch
+// the action can have the same name as the action creator
+const actions = bindActionCreators({updateCurrent}, store.dispatch)
+
 const mapStateToProps = (state) => state
 
-export default connect(mapStateToProps)(App)
+const mapDispatchToProps = (dispatch) => ({
+  ...actions
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
 
 //export default App;

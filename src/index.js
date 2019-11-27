@@ -4,10 +4,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import store from './store'
-import {bindActionCreators} from "redux"
 import {Provider} from 'react-redux' // use to hydrate app with provider HOC
-// Action creator to be bound with bindActionCreators and added to store.dispatch global 'config'
-import {updateCurrent} from './reducers/todo'
 
 // const handleInputChange = (evt) => {
 //   store.dispatch({
@@ -35,15 +32,11 @@ import {updateCurrent} from './reducers/todo'
 // PHASE 3
 // can be written this way because function that dispatch
 // the action can have the same name as the action creator
-const actions = bindActionCreators({updateCurrent}, store.dispatch)
+// const actions = bindActionCreators({updateCurrent}, store.dispatch)
 
 ReactDOM.render(
   <Provider store={store}>
-    <App
-      // changeCurrent={todoChangeHandler}// PHASE 1
-      // changeCurrent={actions.todoChangeHandler}// PHASE 2
-      changeCurrent={actions.updateCurrent}// PHASE 3
-    />
+    <App/>
   </Provider>,
   document.getElementById('root')
 );
