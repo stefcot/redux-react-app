@@ -1,32 +1,47 @@
 // Gives the JSX support
-import React from 'react'
+import React, {Component} from 'react'
 import './TodoForm.css'
 import {connect} from 'react-redux'
-import {updateCurrent} from '../reducers/todo'
+import {updateCurrent, saveTodo} from '../reducers/todo'
 
-const TodoForm = (props) => {
-  console.log('TodoForm::rendering')
-  const{currentTodo, updateCurrent} = props
-  const handleInputChange = (evt) => {
+class TodoForm extends Component {
+
+  handleInputChange = (evt) => {
     const val = evt.target.value
-    updateCurrent(val)
+    this.props.updateCurrent(val)
   }
 
-  return (
-    <form className="todo-form">
-      <input
-        className="todo-input-add"
-        value={currentTodo}
-        onChange={handleInputChange}
-        type={'text'}/>
-    </form>
-  )
+  handleSubmit = (evt) => {
+    evt.preventDefault()
+    this.props.saveTodo(this.props.currentTodo)
+  }
+
+  render() {
+    const { currentTodo } = this.props
+
+    return (
+      <form
+        className="todo-form"
+        onSubmit={this.handleSubmit}
+      >
+        <input
+          className="todo-input-add"
+          value={currentTodo}
+          onChange={this.handleInputChange}
+          type={'text'}/>
+        <button
+          className="todo-button-add"
+          type="submit"
+        >Add</button>
+      </form>
+    )
+  }
 }
 
 const mapStateToProps = (state) => ({
   currentTodo: state.currentTodo
 })
 
-const mapDispatchToProps = {updateCurrent}
+const mapDispatchToProps = {updateCurrent, saveTodo}
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoForm)

@@ -1,7 +1,59 @@
 {
   "todos": [
-    {"id": 1, "name":"Create Static UI", "isComplete": true},
-    {"id": 2, "name":"Create Initial State", "isComplete": false},
-    {"id": 3, "name":"Use state to render UI", "isComplete": false}
+    {
+      "id": 1,
+      "name": "Create Static UI",
+      "isComplete": true
+    },
+    {
+      "id": 2,
+      "name": "Create Initial State",
+      "isComplete": false
+    },
+    {
+      "id": 3,
+      "name": "Use state to render UI",
+      "isComplete": false
+    },
+    {
+      "name": "teret",
+      "isComplete": false,
+      "id": 4
+    },
+    {
+      "name": "Add a new todo",
+      "isComplete": false,
+      "id": 5
+    },
+    {
+      "name": "test for adding a todo",
+      "isComplete": false,
+      "id": 6
+    },
+    {
+      "name": "test",
+      "isComplete": false,
+      "id": 7
+    },
+    {
+      "name": "zertyu",
+      "isComplete": false,
+      "id": 8
+    },
+    {
+      "name": "Adding a todo with the button",
+      "isComplete": false,
+      "id": 9
+    },
+    {
+      "name": "Adding a todo with the button",
+      "isComplete": false,
+      "id": 10
+    },
+    {
+      "name": "Adding a todo with the button",
+      "isComplete": false,
+      "id": 11
+    }
   ]
 }

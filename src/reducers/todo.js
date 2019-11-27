@@ -1,6 +1,4 @@
-import { getTodos } from "../lib/todoServices";
-
-
+import { getTodos, createTodo } from "../lib/todoServices";
 
 const initialState = {
   todos: [],
@@ -12,10 +10,23 @@ const TODO_ADD = 'TODO_ADD'
 const TODOS_INIT = 'TODOS_INIT'
 const CURRENT_UPDATE = 'CURRENT_UPDATE'
 
-// Action creator function
+///////////////////////////////// ACTION CREATOR FUNCTIONS
 export const updateCurrent = (val) => ({ type: CURRENT_UPDATE, payload: val })
 export const initTodos = (todos) => ({ type: TODOS_INIT, payload: todos })
-// Redux thunk allows dispatch to be passed to the returned function
+export const addTodo = (todo) => ({ type: TODO_ADD, payload: todo })
+// POST: Redux thunk allows dispatch to be passed to the returned function
+// here the response can be handled directly,
+// because being the result it's a todo object
+export const saveTodo = (name) => {
+  return (dispatch) => {
+    createTodo(name)
+      .then((res) => {
+        console.log(res)
+        dispatch(addTodo(res))
+      })
+  }
+}
+// GET: Redux thunk allows dispatch to be passed to the returned function
 export const fetchTodos = () => {
   return (dispatch) => {
     getTodos()
@@ -30,7 +41,7 @@ export default (state = initialState, action) => {
     case TODOS_INIT:
       return {...state, todos: action.payload}
     case TODO_ADD:
-      return {...state, todos: [...state.todos, ...[action.payload]]}
+      return {...state, currentTodo: '', todos: [...state.todos, ...[action.payload]]}
       // or return {...state, todos: state.todos.concat(action.payload)
     case CURRENT_UPDATE:
       return {...state, currentTodo: action.payload}

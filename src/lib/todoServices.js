@@ -1,4 +1,5 @@
 /**
+ * Gets all todos at app start
  *
  * @return {Promise<any>}
  */
@@ -7,4 +8,23 @@ export const getTodos = () => {
     .then((res) => {
       return res.json()
     })
+}
+
+/**
+ * Posts a todo item
+ *
+ * @return {Promise<any>}
+ */
+export const createTodo = (name) => {
+  return fetch('http://localhost:8080/todos', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      name: name,
+      isComplete: false
+    })
+  }).then((res) => res.json())
 }
