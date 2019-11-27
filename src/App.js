@@ -7,7 +7,8 @@ import './App.css';
 import {bindActionCreators} from "redux"
 // Action creator to be bound with bindActionCreators and added to store.dispatch global 'config'
 import {updateCurrent} from './reducers/todo'
-import store from "./store";
+// dont need the sotr anymore cause we spread mapped actions creators into mapDispatchToProps returned object
+// import store from "./store";
 
 class App extends React.Component {
   render(){
@@ -43,14 +44,12 @@ class App extends React.Component {
 
 // can be written this way because function that dispatch
 // the action can have the same name as the action creator
-const actions = bindActionCreators({updateCurrent}, store.dispatch)
+// It is useful when a remap of action is needed like below
+//
+// const actions = bindActionCreators({updateCurrent}, store.dispatch) // then spread actions object or reassign to a new prop
 
 const mapStateToProps = (state) => state
 
-const mapDispatchToProps = (dispatch) => ({
-  ...actions
-})
+const mapDispatchToProps = {updateCurrent} // Object content will be bound by 'react-redux'
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
-
-//export default App;
