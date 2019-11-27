@@ -1,20 +1,33 @@
-import React from 'react'
+import React, {Component} from 'react'
 import Todo from './Todo'
 import './TodoList.css'
 import {connect} from 'react-redux'
+import { fetchTodos } from "../reducers/todo";
 
-const TodoList =  ({ todos }) => (
-  <div className="todo-items">
-    <ul className="todo-list">
-      {todos.map((todo) => (
-        <Todo key={todo.id} {...todo} />
-      ))}
-    </ul>
-  </div>
-)
+class TodoList extends Component {
+
+  componentDidMount() {
+    this.props.fetchTodos()
+  }
+
+  render() {
+    return (
+      <div className="todo-items">
+        <ul className="todo-list">
+          {this.props.todos.map((todo) => (
+            <Todo key={todo.id} {...todo} />
+          ))}
+        </ul>
+      </div>
+    )
+  }
+}
+
 
 const mapStateToProps = (state) => ({
   todos: state.todos
 })
 
-export default connect(mapStateToProps)(TodoList)
+const mapDispatchToProps = { fetchTodos }
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList)
