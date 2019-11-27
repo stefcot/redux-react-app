@@ -1,12 +1,17 @@
 // Gives the JSX support
 import React from 'react'
 import './TodoForm.css'
+import {connect} from 'react-redux'
+// import {bindActionCreators} from "redux"
+// Action creator to be bound with bindActionCreators and added to store.dispatch global 'config'
+import {updateCurrent} from '../reducers/todo'
 
-export default (props) => {
-  const{currentTodo, changeCurrent} = props
+const TodoForm = (props) => {
+  console.log('TodoForm::rendering')
+  const{currentTodo, updateCurrent} = props
   const handleInputChange = (evt) => {
     const val = evt.target.value
-    changeCurrent(val)
+    updateCurrent(val)
   }
 
   return (
@@ -19,3 +24,11 @@ export default (props) => {
     </form>
   )
 }
+
+const mapStateToProps = (state) => ({
+  currentTodo: state.currentTodo
+})
+
+const mapDispatchToProps = {updateCurrent}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoForm)
