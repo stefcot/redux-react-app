@@ -5,6 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import store from './store'
 import {bindActionCreators} from "redux"
+import {Provider} from 'react-redux' // use to hydrate app with provider HOC
 // Action creator to be bound with bindActionCreators and added to store.dispatch global 'config'
 import {updateCurrent} from './reducers/todo'
 
@@ -36,30 +37,42 @@ import {updateCurrent} from './reducers/todo'
 // the action can have the same name as the action creator
 const actions = bindActionCreators({updateCurrent}, store.dispatch)
 
-const renderAtStart = () => {
+ReactDOM.render(
+  <Provider store={store}>
+    <App
+      // changeCurrent={todoChangeHandler}// PHASE 1
+      // changeCurrent={actions.todoChangeHandler}// PHASE 2
+      changeCurrent={actions.updateCurrent}// PHASE 3
+    />
+  </Provider>,
+  document.getElementById('root')
+);
+
+// IMPORT: SIMPLE REDUX IMPLEMENTATION WITHOUT REACT-REDUX
+// const renderAtStart = () => {
   // Don't forget to add the store to get last state
-  const state = store.getState()
+  // const state = store.getState()
   // @see: https://github.com/eggheadio-projects/egghead_react_redux_course/tree/master/06_Create-a-Redux-Store
   // because the state, mapped on store should hae a todos prop/entry
   // the state gonna be spread as props
 
   // NO PROVIDER YET
-  ReactDOM.render(<App
-    todos={state.todos}
-    currentTodo={state.currentTodo}
+  // ReactDOM.render(<App
+  //   todos={state.todos}
+  //   currentTodo={state.currentTodo}
     //changeCurrent={todoChangeHandler}// PHASE 1
     //changeCurrent={actions.todoChangeHandler}// PHASE 2
-    changeCurrent={actions.updateCurrent}// PHASE 3
-  />, document.getElementById('root'));
-}
+    //changeCurrent={actions.updateCurrent}// PHASE 3
+//   />, document.getElementById('root'));
+// }
 
 // render just once with initial sore data
-renderAtStart();
+//renderAtStart();
 
 // Changes in the store are subscribed like this,
 // it's a good way to monitor and log changes.
 // For now, the app gonna render thanks to store subscription
-store.subscribe(renderAtStart);
+// store.subscribe(renderAtStart);
 
 // For test purposes, programmatically dispatches an 'TODO_ADD' action
 // setTimeout(() => {
