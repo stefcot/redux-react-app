@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
+import Message from "./components/Message";
 import './App.css';
 
 class App extends React.Component {
@@ -24,6 +25,7 @@ class App extends React.Component {
         </header>
         <main className="todo-page">
           <section className="todo-app">
+            <Message message={'test of message !!!!'}/>
             <TodoForm />
             <TodoList />
           </section>
