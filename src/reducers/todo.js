@@ -7,8 +7,8 @@ const initialState = {
 }
 
 // Store actions types into contant to get an build error if there's some mistype
-const TODO_ADD = 'TODO_ADD'
-const TODOS_INIT = 'TODOS_INIT'
+export const TODO_ADD = 'TODO_ADD'
+export const TODOS_INIT = 'TODOS_INIT'
 const CURRENT_UPDATE = 'CURRENT_UPDATE'
 
 ///////////////////////////////// SYNC ACTION CREATOR FUNCTIONS
@@ -33,6 +33,7 @@ export const saveTodo = (name) => {
 // GET: Redux thunk allows dispatch to be passed to the returned function
 export const fetchTodos = () => {
   return (dispatch) => {
+    dispatch(showMessage('Loading todos list...'))
     getTodos()
       .then((todos) => {
         dispatch(initTodos(todos))
