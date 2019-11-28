@@ -1,4 +1,4 @@
-import {TODO_ADD, TODOS_INIT, TODO_REPLACE} from './todo'; // reducers can commonly treat actions
+import {TODO_ADD, TODOS_INIT, TODO_REPLACE, TODO_DELETE} from './todo'; // reducers can commonly treat actions
 
 const MESSAGE_SHOW = 'MESSAGE_SHOW'
 
@@ -11,6 +11,7 @@ export default function(state='', action) {
     case TODO_ADD:
     case TODOS_INIT:
     case TODO_REPLACE:
+    case TODO_DELETE:
       return '' // or undefined, null
     default:
       return state

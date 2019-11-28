@@ -9,6 +9,9 @@
   padding: 0;
 }
 
+::-moz-selection { background: #09d3ac; color: #fff }
+::selection { background: #09d3ac; color: #fff }
+
 /* Document
    ========================================================================== */
 

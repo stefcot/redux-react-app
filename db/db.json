@@ -1,27 +1,17 @@
 {
   "todos": [
     {
-      "id": 1,
-      "name": "Create Static UI",
-      "isComplete": false
-    },
-    {
       "id": 2,
       "name": "Create Initial State",
-      "isComplete": false
-    },
-    {
-      "id": 3,
-      "name": "Use state to render UI",
-      "isComplete": false
+      "isComplete": true
     },
     {
       "name": "Add a task triggering message",
-      "isComplete": true,
+      "isComplete": false,
       "id": 4
     },
     {
-      "name": "Adding anaother task",
+      "name": "Do the washing up",
       "isComplete": false,
       "id": 5
     }

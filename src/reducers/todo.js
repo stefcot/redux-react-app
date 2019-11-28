@@ -1,4 +1,4 @@
-import { getTodos, createTodo, updateTodo } from "../lib/todoServices";
+import { getTodos, createTodo, updateTodo, destroyTodo } from "../lib/todoServices";
 import {showMessage} from './message' // Import showMessage action creator
 
 const sleep = (ms) => {
@@ -15,12 +15,14 @@ export const TODO_ADD = 'TODO_ADD'
 export const TODOS_INIT = 'TODOS_INIT'
 const CURRENT_UPDATE = 'CURRENT_UPDATE'
 export const TODO_REPLACE = 'TODO_REPLACE'
+export const TODO_DELETE = 'TODO_DELETE'
 
 ///////////////////////////////// SYNC ACTION CREATOR FUNCTIONS
 export const updateCurrent = (val) => ({ type: CURRENT_UPDATE, payload: val })
 export const initTodos = (todos) => ({ type: TODOS_INIT, payload: todos })
 export const addTodo = (todo) => ({ type: TODO_ADD, payload: todo })
 export const replaceTodo = (todo) => ({ type: TODO_REPLACE, payload: todo })
+export const removeTodo = (id) => ({ type: TODO_DELETE, payload: id })
 
 ///////////////////////////////// ASYNC ACTION CREATOR FUNCTIONS
 // POST: Redux thunk allows dispatch to be passed to the returned function
@@ -52,19 +54,31 @@ export const fetchTodos = () => {
 // IMPORTANT: always use expression declaration
 export const toggleTodo = (id) => {
   return async (dispatch, getState) => {
-    dispatch(showMessage('Saving todo...'))
+    dispatch(showMessage('Updating todo...'))
     const {todos} = getState().todo // namespace defined in the combineReducers
     const todo = todos.find((t) => t.id === id)
     const toggledTodo = {...todo, isComplete: !todo.isComplete}
 
     try {
-      await sleep(5000);// some mock delay in the request
+      await sleep(1000);// some mock delay in the request
       // update service
       const res = await updateTodo(toggledTodo)
       dispatch(replaceTodo(res))
     } catch(err) {
       dispatch(showMessage('<span class="error">An error occured</span>'))
     }
+  }
+}
+
+// DELETE: Async action creator for deleting item,
+export const deleteTodo = (id) => {
+  return (dispatch) => {
+    dispatch(showMessage('Deleting todo...'))
+    destroyTodo(id)
+      .then((res) => {
+        console.log(res)
+        dispatch(removeTodo(id))
+      })
   }
 }
 
@@ -80,6 +94,11 @@ export default (state = initialState, action) => {
       return {...state,
         // if, in the list, an item has the same id as the passed payload, it gets replaced
         todos: state.todos.map((todo) => todo.id === action.payload.id ? action.payload : todo)
+      }
+    case TODO_DELETE:
+      return {
+        ...state,
+        todos: state.todos.filter((todo) => todo.id !== action.payload )
       }
     case CURRENT_UPDATE:
       return {...state, currentTodo: action.payload}
