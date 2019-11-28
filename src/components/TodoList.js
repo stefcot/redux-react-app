@@ -25,7 +25,7 @@ class TodoList extends Component {
 
 
 const mapStateToProps = (state) => ({
-  todos: state.todos
+  todos: state.todo.todos
 })
 
 const mapDispatchToProps = { fetchTodos }

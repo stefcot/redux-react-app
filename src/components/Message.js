@@ -1,4 +1,5 @@
 import React from 'react'
+import {connect} from "react-redux";
 import './Message.css'
 
 const Message = ({message}) => (
@@ -7,4 +8,8 @@ const Message = ({message}) => (
     : null
 )
 
-export default Message
+const mapStateToProps = (state) => ({
+  message: state.message // passed this way cause it doesn't have any property
+})
+
+export default connect(mapStateToProps)(Message)

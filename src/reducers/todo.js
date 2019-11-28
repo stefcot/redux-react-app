@@ -1,4 +1,5 @@
 import { getTodos, createTodo } from "../lib/todoServices";
+import {showMessage} from './message' // import showMessage action creator
 
 const initialState = {
   todos: [],
@@ -10,15 +11,18 @@ const TODO_ADD = 'TODO_ADD'
 const TODOS_INIT = 'TODOS_INIT'
 const CURRENT_UPDATE = 'CURRENT_UPDATE'
 
-///////////////////////////////// ACTION CREATOR FUNCTIONS
+///////////////////////////////// SYNC ACTION CREATOR FUNCTIONS
 export const updateCurrent = (val) => ({ type: CURRENT_UPDATE, payload: val })
 export const initTodos = (todos) => ({ type: TODOS_INIT, payload: todos })
 export const addTodo = (todo) => ({ type: TODO_ADD, payload: todo })
+
+///////////////////////////////// ASYNC ACTION CREATOR FUNCTIONS
 // POST: Redux thunk allows dispatch to be passed to the returned function
 // here the response can be handled directly,
 // because being the result it's a todo object
 export const saveTodo = (name) => {
   return (dispatch) => {
+    dispatch(showMessage('Saving new todo...'))
     createTodo(name)
       .then((res) => {
         console.log(res)
@@ -36,6 +40,7 @@ export const fetchTodos = () => {
   }
 }
 
+////////////////////////////////////// REDUCER
 export default (state = initialState, action) => {
   switch (action.type) {
     case TODOS_INIT:
