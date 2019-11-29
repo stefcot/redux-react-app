@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router} from "react-router-dom";
+import {BrowserRouter as Router, Route} from "react-router-dom";
 import logo from './logo.svg';
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
@@ -30,7 +30,13 @@ class App extends React.Component {
             <section className="todo-app">
               <Message message={'test of message !!!!'}/>
               <TodoForm />
-              <TodoList />
+              <Route
+                path="/:filter?"
+                render={({match}) => (
+                  <TodoList filter={match.params.filter} />
+                  )}
+              >
+              </Route>
             </section>
           </main>
           <Footer/>
