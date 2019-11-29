@@ -1,10 +1,12 @@
+const BASE_URL = process.env.REACT_APP_BASE_URL
+
 /**
  * Gets all todos at app start
  *
  * @return {Promise<any>}
  */
 export const getTodos = () => {
-  return fetch('http://localhost:8080/todos')
+  return fetch(BASE_URL)
     .then((res) => {
       return res.json()
     })
@@ -16,7 +18,7 @@ export const getTodos = () => {
  * @return {Promise<any>}
  */
 export const createTodo = (name) => {
-  return fetch('http://localhost:8080/todos', {
+  return fetch(BASE_URL, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -35,7 +37,7 @@ export const createTodo = (name) => {
  * @return {Promise<any>}
  */
 export const updateTodo = (todo) => {
-  return fetch( `http://localhost:8080/todos/${todo.id}`, {
+  return fetch( `${BASE_URL}/${todo.id}`, {
     method: 'PUT',
     headers: {
       'Accept': 'application/json',
@@ -52,7 +54,7 @@ export const updateTodo = (todo) => {
  * @return {Promise<any>}
  */
 export const destroyTodo = (id) => {
-  return fetch( `http://localhost:8080/todos/${id}`, {
+  return fetch( `${BASE_URL}/${id}`, {
     method: 'DELETE',
     headers: {
       'Accept': 'application/json',
